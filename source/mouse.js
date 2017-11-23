@@ -53,4 +53,13 @@ export default class Mouse {
 		this.mouseup = true;
 	}
 
+	draw(engine) {
+
+		engine.context.fillStyle = 'rgba(255,255,255,0.5)';
+		engine.context.beginPath();
+		engine.context.arc(this.x, this.y, 20, 0, Math.PI*2);
+		engine.context.fill();
+
+	}
+
 }
