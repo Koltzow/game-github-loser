@@ -1,6 +1,6 @@
 export default class Mouse {
 
-	constructor(target) {
+	constructor(target = null, scale = 1) {
 
 		// define position
 		this.x = 0;
@@ -10,6 +10,9 @@ export default class Mouse {
 		this.mousedown = false;
 		this.mouseup = false;
 		this.clicked = false;
+
+		// set scale
+		this.scale = scale;
 
 		// set mouse target
 		this.target = target;
@@ -24,6 +27,10 @@ export default class Mouse {
 		this.clicked = false;
 	}
 
+	setScale(scale) {
+		this.scale = scale;
+	}
+
 	click() {
 		this.clicked = true;
 	}
@@ -33,8 +40,8 @@ export default class Mouse {
 	}
 
 	mousemove(e) {
-		this.x = e.offsetX;
-		this.y = e.offsetY;
+		this.x = e.offsetX / this.scale;
+		this.y = e.offsetY / this.scale;
 	}
 
 	mousedown(e) {

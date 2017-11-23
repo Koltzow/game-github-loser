@@ -19,7 +19,6 @@ export default class engine {
 
   constructor() {
 
-
     // set dimentions
     this.width = 1920;
     this.height = 1080;
@@ -47,7 +46,7 @@ export default class engine {
 		this.deltaTime = 0;
 
     // setup external classes
-    this.mouse = new Mouse(this.canvas);
+    this.mouse = new Mouse(this.canvas, this.scale);
     this.keyboard = new Keyboard();
     this.debugger = new Debugger();
     this.splashscreen = new Splashscreen();
@@ -91,6 +90,19 @@ export default class engine {
 			window.mozRequestAnimationFrame    ||
 			((callback) => window.setTimeout(callback, 1000 / 60))
 		))();
+
+    // event listener
+    window.addEventListener('resize', this.resize.bind(this));
+
+  }
+
+  resize() {
+
+    console.log('resize');
+
+    // recalc scale
+    this.scale = window.innerWidth / this.width;
+    this.mouse.setScale(this.scale);
 
   }
 
@@ -246,6 +258,8 @@ export default class engine {
 				break;
 			default:
 		}
+
+    this.mouse.draw(this);
 
     // update debugger
     // this.debugger.add(this.mouse.x / this.scale);

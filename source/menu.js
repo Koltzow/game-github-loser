@@ -10,7 +10,7 @@ export default class Menu {
 
   update(engine) {
 
-    const { keyboard, games, width, height, mouse, scale, sound } = engine;
+    const { keyboard, games, width, height, mouse, sound } = engine;
 
     if(keyboard.isClicked(keyboard.key.SPACE) || keyboard.isClicked(keyboard.key.ENTER)) {
       if(engine.setGame(this.selected)){
@@ -33,10 +33,10 @@ export default class Menu {
       const y = height*0.5;
 
       if(
-        mouse.x / scale > x &&
-        mouse.x / scale < x + this.size &&
-        mouse.y / scale > y &&
-        mouse.y / scale < y + this.size
+        mouse.x > x &&
+        mouse.x < x + this.size &&
+        mouse.y > y &&
+        mouse.y < y + this.size
       ) {
         this.selected = index;
 

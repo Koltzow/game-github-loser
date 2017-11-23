@@ -31,7 +31,7 @@ export default class Paddle {
 
   update(engine, balls) {
 
-    const { keyboard, height, scale, mouse } = engine;
+    const { keyboard, height, mouse } = engine;
 
     let y = this.y;
 
@@ -61,7 +61,7 @@ export default class Paddle {
         this.y += this.speed;
       }
 
-      this.y = (mouse.y / scale) - this.height/2;
+      this.y = (mouse.y) - this.height/2;
 
     }
 
