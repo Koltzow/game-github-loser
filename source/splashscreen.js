@@ -2,9 +2,9 @@ export default class Splashscreen {
 
   update(engine) {
 
-    const { keyboard } = engine;
+    const { keyboard, mouse } = engine;
 
-    if(keyboard.isClicked(keyboard.key.SPACE) || keyboard.isClicked(keyboard.key.ENTER)) {
+    if(keyboard.isClicked(keyboard.key.SPACE) || keyboard.isClicked(keyboard.key.ENTER) || mouse.isClicked()) {
       engine.sound.play('select');
       engine.setState('MENU');
     }
