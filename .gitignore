@@ -1,0 +1,4 @@
+node_modules
+*.log
+game.js
+.DS_Store
