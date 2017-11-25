@@ -7,10 +7,10 @@ export default class Sound {
 
 	}
 
-	play(id, params = {
-		volume: 1,
-		loop: 0,
-	}) {
+	play(id = null, {
+		volume = 1,
+		loop = 0,
+	} = {}) {
 
 		const _this = this;
 
@@ -29,19 +29,19 @@ export default class Sound {
 
 			const audio = new Audio();
 
-			audio.volume = params.volume;
+			audio.volume = volume;
 
 			let loopCounter = 0;
 
-			if(params.loop === -1){
+			if(loop === -1){
 
 				audio.loop = true;
 
-			} else if (params.loop > 1) {
+			} else if (loop > 1) {
 
 				audio.addEventListener('ended', function(){
 					_this.remove(sound.id);
-				    if (loopCounter < parama.loop-1){
+				    if (loopCounter < loop-1){
 				        this.currentTime = 0;
 				        this.play();
 				        _this.soundsPlaying.push({
@@ -70,6 +70,8 @@ export default class Sound {
 
 		} else {
 			sound.play = true;
+			sound.loop = loop;
+			sound.volume = volume;
 			console.warn('Sound not ready, playing when loaded');
 		}
 
@@ -137,7 +139,9 @@ export default class Sound {
 						let newSound = {
 							id: sound.id,
 							src: sound.src,
-							loaded: false
+							loaded: false,
+							loop:0,
+							volume: 1,
 						};
 
 						_this.sounds.push(newSound);
@@ -148,7 +152,10 @@ export default class Sound {
 							newSound.loaded = true;
 
 							if(newSound.play){
-								_this.play(newSound.id);
+								_this.play(newSound.id, {
+									loop: newSound.loop,
+									volume: newSound.volume,
+								});
 							}
 						}, false);
 
