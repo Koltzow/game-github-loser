@@ -1,9 +1,12 @@
 import Ball from './ball';
 import Paddle from './paddle';
+import Game from '../game';
 
-export default class Pong {
+export default class Pong extends Game{
 
   constructor(engine) {
+
+    super();
 
     // set title
     this.title = 'Pong';
@@ -165,13 +168,13 @@ export default class Pong {
     }
 
   }
-
+  
   update(engine) {
 
-    // check is player has won
-    if(this.score[0] >= this.winMax) {
+    // check is computer has won
+    if(this.score[1] >= this.loseMax) {
 
-      // change state back to level select
+      // go back to level select
       engine.setState('LEVELS');
 
       // return to stop further execution
@@ -179,31 +182,16 @@ export default class Pong {
 
     }
 
-    // check is computer has won
-    if(this.score[1] >= this.loseMax) {
+    // check is player has won
+    if(this.score[0] >= this.winMax) {
 
-      // unlock next level if more
-      if(engine.currentLevelIndex < this.levels.length - 1){
-        this.levels[engine.currentLevelIndex+1].unlocked = true;
+      if(this.unlockNextLevel(engine)) {
+        engine.setState('LEVELS');
       }
 
       // check for last level and more games
-      if(
-        engine.currentLevelIndex >= this.levels.length &&
-        engine.currentGameIndex < engine.games.length - 1
-      ) {
-
-        // unlock next game
-        this.games[engine.currentGameIndex + 1].unlocked = true;
-
-        // change state back to game select
+      if(this.unlockNextGame(engine)) {
         engine.setState('MENU');
-
-      } else {
-
-        // if not go back to level select
-        engine.setState('LEVELS');
-
       }
 
       // return to stop further execution
