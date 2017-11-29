@@ -6,16 +6,8 @@ export default class Pong extends Game{
 
   constructor(engine) {
 
-    super();
-
-    // set title
-    this.title = 'Pong';
-
-    // set state
-    this.unlocked = true;
-
     // add level info
-    this.levels = [
+    const levels = [
       {
         title: 'small ball',
         image: '',
@@ -57,6 +49,8 @@ export default class Pong extends Game{
         }
       }
     ];
+
+    super('Pong', true, levels);
 
     // set default properties
     this.properties = this.levels[0];
@@ -168,7 +162,7 @@ export default class Pong extends Game{
     }
 
   }
-  
+
   update(engine) {
 
     // check is computer has won

@@ -1,15 +1,15 @@
 export default class Game {
 
-  constructor() {
+  constructor(title = 'default', unlocked = true, levels = []) {
 
     // set title
-    this.title = 'Default';
+    this.title = title;
 
     // set state
-    this.unlocked = true;
+    this.unlocked = unlocked;
 
     // add level info
-    this.levels = [];
+    this.levels = levels;
 
   }
 
