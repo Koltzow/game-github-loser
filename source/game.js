@@ -1,6 +1,6 @@
 export default class Game {
 
-  constructor(title = 'default', unlocked = true, levels = []) {
+  constructor(title = 'default title', unlocked = true) {
 
     // set title
     this.title = title;
@@ -8,14 +8,18 @@ export default class Game {
     // set state
     this.unlocked = unlocked;
 
-    // add level info
-    this.levels = levels;
+    // define levels
+    this.levels = [];
 
   }
 
   reset() {}
 
   setup() {}
+
+  addLevel(level) {
+    this.levels.push(level);
+  }
 
   unlockNextLevel(engine) {
 

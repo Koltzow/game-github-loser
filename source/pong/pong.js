@@ -1,59 +1,59 @@
 import Ball from './ball';
 import Paddle from './paddle';
 import Game from '../game';
+import Level from '../level';
 
 export default class Pong extends Game{
 
   constructor(engine) {
 
-    // add level info
-    const levels = [
+    super('Pong', true);
+
+    const level1 = new Level(
+      'Small ball',
+      null,
+      true,
       {
-        title: 'small ball',
-        image: '',
-        unlocked: true,
-        properties: {
-          player: {
-            height: 200,
-            speed: 10,
-          },
-          computer: {
-            height: 100,
-            speed: 2,
-          },
-          ball: {
-            count: 1,
-            speed: 20,
-            size: 30,
-          }
-        }
-      },
-      {
-        title: 'big ball',
-        image: '',
-        unlocked: false,
-        properties: {
-          player: {
-            height: 100,
-            speed: 2,
-          },
-          computer: {
-            height: 400,
-            speed: 20,
-          },
-          ball: {
-            count: 1,
-            speed: 20,
-            size: 60,
-          }
+        player: {
+          height: 200,
+          speed: 10,
+        },
+        computer: {
+          height: 100,
+          speed: 2,
+        },
+        ball: {
+          count: 1,
+          speed: 20,
+          size: 30,
         }
       }
-    ];
+    );
 
-    super('Pong', true, levels);
+    this.addLevel(level1);
 
-    // set default properties
-    this.properties = this.levels[0];
+    const level2 = new Level(
+      'Big ball',
+      null,
+      false,
+      {
+        player: {
+          height: 100,
+          speed: 2,
+        },
+        computer: {
+          height: 400,
+          speed: 20,
+        },
+        ball: {
+          count: 1,
+          speed: 20,
+          size: 60,
+        }
+      }
+    );
+
+    this.addLevel(level2);
 
     // define effects
     this.effects = [];
